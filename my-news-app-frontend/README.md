@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Docker Compose Setup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Prerequisites
 
-## Available Scripts
+Before starting, make sure you have installed:
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/) (if you use Docker Desktop, it is already included)
 
-In the project directory, you can run:
+## Docker Compose Configuration
 
-### `npm start`
+The docker-compose file is already included on the project.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Start Services with Docker Compose
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To start the services defined in `docker-compose.yml`, use the following command:
 
-### `npm test`
+```sh
+docker-compose up --build -d
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `-d` (optional) runs the containers in the background ("detached" mode).
 
-### `npm run build`
+If you want to see the service logs in real-time:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+docker-compose logs -f
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Stop and Remove Services
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To stop the containers without removing them, run:
 
-### `npm run eject`
+```sh
+docker-compose stop
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To stop and remove the containers, volumes, and associated networks, use:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
+docker-compose down
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Check Running Containers
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You can check which containers are running with:
 
-## Learn More
+```sh
+docker ps
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Remove Containers and Volumes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you need to completely clean up the containers and volumes created by Docker Compose, use:
 
-### Code Splitting
+```sh
+docker-compose down --volumes
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Additional Notes
 
-### Analyzing the Bundle Size
+- If you make changes to `docker-compose.yml`, restart the services with:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  ```sh
+  docker-compose up -d --build
+  ```
 
-### Making a Progressive Web App
+- To access a running container:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  ```sh
+  docker exec -it my_node_app sh
+  ```
 
-### Advanced Configuration
+This will open a terminal inside the `my_node_app` container.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

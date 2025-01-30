@@ -1,7 +1,6 @@
 import NewsCard from "./NewsCard";
 import { useNews } from "../providers/NewsProvider";
 
-
 const ArchivedDisplay = () => {
   const { archivedNews } = useNews();
 

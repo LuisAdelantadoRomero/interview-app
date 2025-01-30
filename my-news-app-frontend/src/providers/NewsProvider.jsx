@@ -4,6 +4,10 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import exampleNews from '../data/dataExample';
 
 const NewsContext = createContext();
+const NEWS_URL = process.env.REACT_APP_NEWS_API_URL;
+const ARCHIVED_NEWS_URL = process.env.REACT_APP_ARCHIVED_API_URL;
+console.log("NEWS_URL:", NEWS_URL); // Debugging
+console.log("ARCHIVED_NEWS_URL:", ARCHIVED_NEWS_URL); // Debugging
 
 export const NewsProvider = ({ children }) => {
   const [newsList, setNewsList] = useState([]);
@@ -12,7 +16,7 @@ export const NewsProvider = ({ children }) => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/news');
+        const response = await fetch(NEWS_URL);
         const data = await response.json();
         const sortedData = data.sort((a, b) => {
           const dateA = new Date(a.date); // Convert date to Date object
@@ -27,12 +31,23 @@ export const NewsProvider = ({ children }) => {
       }
     };
 
+    const fetchArchivedNews = async () => {
+      try {
+        const response = await fetch(ARCHIVED_NEWS_URL);
+        debugger
+        const data = await response.json();
+        setArchivedNews(data); // Update archivedNews state with fetched data
+      } catch (error) {
+        console.error('Error fetching archived news:', error);
+      }
+    }
+
     fetchNews(); // Call the fetch function
+    fetchArchivedNews();
   }, []);
 
   // Function to archive a news item
   const archiveNews = (title) => {
-    console.log('Archiving news:', title);
     // First, find the news item by title
     const newsToArchive = newsList.find(news => news.title === title);
 
@@ -52,8 +67,7 @@ export const NewsProvider = ({ children }) => {
       ]);
 
       try {
-        console.log('Archiving news:', title);
-        fetch(`http://localhost:8000/api/news/archive/${title}`, {
+        fetch(`${NEWS_URL}/archive/${title}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -68,7 +82,7 @@ export const NewsProvider = ({ children }) => {
 
   const deleteNew = async (title) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/news/deleteNew/${title}`, {
+      const response = await fetch(`${NEWS_URL}/deleteNew/${title}`, {
         method: 'DELETE',
       });
   

@@ -19,6 +19,9 @@ services:
     build: ./my-news-app-frontend
     ports:
       - "5500:3000"  # Ajustado para React/Vite
+    environment:
+      - REACT_APP_NEWS_API_URL=http://localhost:8000/api/news
+      - REACT_APP_ARCHIVED_API_URL=http://localhost:8000/api/news/archived
     volumes:
       - ./my-news-app-frontend:/app
       - /app/node_modules  # Evita sobrescribir node_modules
