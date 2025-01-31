@@ -1,4 +1,5 @@
-import NewsCard from "./NewsCard";
+import Layout from "../components/Layout";
+import NewsCard from "../components/NewsCard";
 import { useNews } from "../providers/NewsProvider";
 
 const NewsDisplay = () => {
@@ -6,10 +7,10 @@ const NewsDisplay = () => {
 
   const activeNews = newsList.filter(news => !news.archived);
 
-  if (!activeNews.length) return <p>No news available.</p>;
+  if (!activeNews.length) return <Layout><p>No news available.</p></Layout>
 
   return (
-    <div>
+    <Layout>
       {activeNews.map((item, index) => (
 
           <NewsCard
@@ -20,7 +21,7 @@ const NewsDisplay = () => {
             date={item.date}
           />
       ))}
-    </div>
+    </Layout>
   );
 };
 

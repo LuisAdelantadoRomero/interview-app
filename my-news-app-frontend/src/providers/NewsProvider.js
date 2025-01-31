@@ -1,15 +1,18 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 //If we want just to test functionality without loading the backend we can useState with this sample
-// import exampleNews from '../data/dataExample';
+import exampleNews from '../data/dataExample';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const NewsContext = createContext();
 const NEWS_URL = process.env.REACT_APP_NEWS_API_URL;
 const ARCHIVED_NEWS_URL = process.env.REACT_APP_ARCHIVED_API_URL;
 
 export const NewsProvider = ({ children }) => {
-  const [newsList, setNewsList] = useState([]);
+  const [newsList, setNewsList] = useState(exampleNews);
   const [archivedNews, setArchivedNews] = useState([]);
+  const [loadingTitle, setLoadingTitle] = useState();
     // Fetch news from the API on mount
   useEffect(() => {
     const fetchNews = async () => {
@@ -25,7 +28,10 @@ export const NewsProvider = ({ children }) => {
         
         setNewsList(sortedData); // Update newsList state with fetched data
       } catch (error) {
-        console.error('Error fetching news:', error);
+        toast.error('Error fetching news. Try again later!', {
+          autoClose: 2000,
+          hideProgressBar: false,
+          });
       }
     };
 
@@ -35,7 +41,10 @@ export const NewsProvider = ({ children }) => {
         const data = await response.json();
         setArchivedNews(data); // Update archivedNews state with fetched data
       } catch (error) {
-        console.error('Error fetching archived news:', error);
+        toast.error('Error fetching archived news. Try again later!', {
+          autoClose: 2000,
+          hideProgressBar: false,
+          });
       }
     }
 
@@ -64,6 +73,7 @@ export const NewsProvider = ({ children }) => {
       ]);
 
       try {
+        setLoadingTitle(title)
         fetch(`${NEWS_URL}/archive/${title}`, {
           method: 'PUT',
           headers: {
@@ -72,7 +82,12 @@ export const NewsProvider = ({ children }) => {
           body: JSON.stringify({ archived: true })
         });
       } catch (error) {
-        console.error('Error archiving news:', error);
+        toast.error('Error archiving news. Try again later!', {
+          autoClose: 2000,
+          hideProgressBar: false,
+          });
+      } finally {
+        setLoadingTitle()
       }
     }
   };
@@ -84,6 +99,7 @@ export const NewsProvider = ({ children }) => {
       });
   
       if (!response.ok) {
+        toast.error('Error deleting news. Try again later!');
         throw new Error('Failed to delete the news');
       }
   
@@ -93,14 +109,14 @@ export const NewsProvider = ({ children }) => {
         prevArchived.filter(news => news.title !== title)
       );
     } catch (error) {
-      console.error('Error deleting news:', error);
+      toast.error('Error deleting news. Try again later!');
     }
   }
 
   
 
   return (
-    <NewsContext.Provider value={{ newsList, archivedNews, archiveNews, deleteNew }}>
+    <NewsContext.Provider value={{ newsList, archivedNews, archiveNews, deleteNew, loadingTitle }}>
       {children}
     </NewsContext.Provider>
   );

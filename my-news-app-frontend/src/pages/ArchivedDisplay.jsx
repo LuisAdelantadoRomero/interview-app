@@ -1,14 +1,15 @@
-import NewsCard from "./NewsCard";
+import Layout from "../components/Layout";
+import NewsCard from "../components/NewsCard";
 import { useNews } from "../providers/NewsProvider";
 
 const ArchivedDisplay = () => {
   const { archivedNews } = useNews();
 
   if (!archivedNews || archivedNews.length === 0) {
-    return <p>No archived news.</p>
+    return <Layout><p>No archived news.</p></Layout>
   }
     return (
-      <div>
+      <Layout>
       {archivedNews.map((item, index) => (
         <NewsCard
           key={index}
@@ -19,7 +20,7 @@ const ArchivedDisplay = () => {
           archived={item.archived}
         />
       ))}
-    </div>
+    </Layout>
     );
 }
 

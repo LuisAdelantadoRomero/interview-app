@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { useNews } from "../providers/NewsProvider";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
+import { parseDate } from '../utils/date';
 
 const Card = styled.div`
   background-color: white;
@@ -34,7 +37,7 @@ const Button = styled.button`
 `;
 
 const NewsCard = ({ title, image, description, date, archived }) => {
-  const { archiveNews, deleteNew } = useNews();
+  const { archiveNews, deleteNew, loadingTitle } = useNews();
   const handleArchive = () => archiveNews(title);
   const deleteArchive = () => deleteNew(title);
 
@@ -42,9 +45,9 @@ const NewsCard = ({ title, image, description, date, archived }) => {
         <Card>
             <Image src={image} alt={title} />
             <h2>{title}</h2>
-            <p>{date}</p>
+            <p>{parseDate(date)}</p>
             <p>{description}</p>
-            {!archived ? <Button onClick={handleArchive}>Archive</Button> : <Button onClick={deleteArchive}>Delete</Button>}
+            {!archived ? <Button disabled={loadingTitle === title} onClick={handleArchive}>Archive</Button> : <Button onClick={deleteArchive}>Delete</Button>}
         </Card>
         
       );
