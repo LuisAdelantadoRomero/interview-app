@@ -6,9 +6,7 @@ const NewsDisplay = () => {
 
   const activeNews = newsList.filter(news => !news.archived);
 
-  if (activeNews.length === 0) {
-    return <p>No news available.</p>;
-  }
+  if (!activeNews.length) return <p>No news available.</p>;
 
   return (
     <div>

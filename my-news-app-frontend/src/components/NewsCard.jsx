@@ -35,14 +35,8 @@ const Button = styled.button`
 
 const NewsCard = ({ title, image, description, date, archived }) => {
   const { archiveNews, deleteNew } = useNews();
-
-  const handleArchive = () => {
-    archiveNews(title)
-  }
-
-  const deleteArchive = () => {
-    deleteNew(title)
-  }
+  const handleArchive = () => archiveNews(title);
+  const deleteArchive = () => deleteNew(title);
 
     return (
         <Card>

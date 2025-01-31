@@ -5,7 +5,7 @@ const ArchivedDisplay = () => {
   const { archivedNews } = useNews();
 
   if (!archivedNews || archivedNews.length === 0) {
-    return <p>No archived news</p>
+    return <p>No archived news.</p>
   }
     return (
       <div>

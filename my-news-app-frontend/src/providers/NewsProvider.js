@@ -1,13 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 //If we want just to test functionality without loading the backend we can useState with this sample
-import exampleNews from '../data/dataExample';
+// import exampleNews from '../data/dataExample';
 
 const NewsContext = createContext();
 const NEWS_URL = process.env.REACT_APP_NEWS_API_URL;
 const ARCHIVED_NEWS_URL = process.env.REACT_APP_ARCHIVED_API_URL;
-console.log("NEWS_URL:", NEWS_URL); // Debugging
-console.log("ARCHIVED_NEWS_URL:", ARCHIVED_NEWS_URL); // Debugging
 
 export const NewsProvider = ({ children }) => {
   const [newsList, setNewsList] = useState([]);
@@ -33,8 +31,7 @@ export const NewsProvider = ({ children }) => {
 
     const fetchArchivedNews = async () => {
       try {
-        const response = await fetch(ARCHIVED_NEWS_URL);
-        debugger
+        const response = await fetch(ARCHIVED_NEWS_URL);     
         const data = await response.json();
         setArchivedNews(data); // Update archivedNews state with fetched data
       } catch (error) {
@@ -95,7 +92,6 @@ export const NewsProvider = ({ children }) => {
       setArchivedNews(prevArchived =>
         prevArchived.filter(news => news.title !== title)
       );
-      console.log('News deleted successfully');
     } catch (error) {
       console.error('Error deleting news:', error);
     }

@@ -44,22 +44,31 @@ export const TabContent = styled.div`
   background-color: #f9f9f9;
 `;
 
+const routes = {
+    News: <NewsDisplay />,
+    Archived: <ArchivedDisplay />,
+}
+
 const Tabs = () => {
   return (
     <TabsContainer>
       <TabButtons>
-        <TabButton to="/news" activeClassName="active">
-          News
-        </TabButton>
-        <TabButton to="/archived" activeClassName="active">
-          Archived
-        </TabButton>
+          {Object.keys(routes).map((routeKey) => {
+              const route = `/${routeKey}`;
+              const isActive = window.location.pathname === route;
+              return (
+                  <TabButton to={route} className={isActive ? "active" : ""} key={routeKey}>
+                      {routeKey}
+                  </TabButton>
+              );
+          })}
       </TabButtons>
 
       <TabContent>
         <Routes>
-          <Route path="/news" element={<NewsDisplay />} />
-          <Route path="/archived" element={<ArchivedDisplay />} />
+            {Object.keys(routes).map((routeKey) => (
+                <Route path={`/${routeKey}`} element={routes[routeKey]} key={routeKey} />
+            ))}
         </Routes>
       </TabContent>
     </TabsContainer>
