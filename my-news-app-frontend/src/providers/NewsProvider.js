@@ -2,8 +2,6 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 //If we want just to test functionality without loading the backend we can useState with this sample
 import exampleNews from '../data/dataExample';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
 
 const NewsContext = createContext();
 const NEWS_URL = process.env.REACT_APP_NEWS_API_URL;
@@ -27,11 +25,7 @@ export const NewsProvider = ({ children }) => {
         });
         
         setNewsList(sortedData); // Update newsList state with fetched data
-      } catch (error) {
-        toast.error('Error fetching news. Try again later!', {
-          autoClose: 2000,
-          hideProgressBar: false,
-          });
+      } catch {
       }
     };
 
@@ -40,11 +34,7 @@ export const NewsProvider = ({ children }) => {
         const response = await fetch(ARCHIVED_NEWS_URL);     
         const data = await response.json();
         setArchivedNews(data); // Update archivedNews state with fetched data
-      } catch (error) {
-        toast.error('Error fetching archived news. Try again later!', {
-          autoClose: 2000,
-          hideProgressBar: false,
-          });
+      } catch {
       }
     }
 
@@ -81,12 +71,7 @@ export const NewsProvider = ({ children }) => {
           },
           body: JSON.stringify({ archived: true })
         });
-      } catch (error) {
-        toast.error('Error archiving news. Try again later!', {
-          autoClose: 2000,
-          hideProgressBar: false,
-          });
-      } finally {
+      } catch {} finally {
         setLoadingTitle()
       }
     }
@@ -99,7 +84,6 @@ export const NewsProvider = ({ children }) => {
       });
   
       if (!response.ok) {
-        toast.error('Error deleting news. Try again later!');
         throw new Error('Failed to delete the news');
       }
   
@@ -109,7 +93,6 @@ export const NewsProvider = ({ children }) => {
         prevArchived.filter(news => news.title !== title)
       );
     } catch (error) {
-      toast.error('Error deleting news. Try again later!');
     }
   }
 

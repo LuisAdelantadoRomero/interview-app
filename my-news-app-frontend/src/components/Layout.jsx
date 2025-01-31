@@ -46,10 +46,10 @@ const TabContent = styled.div`
 `;
 
 function Layout({ children }) {
-    const { pathname } = window.location;
     return (
         <>
         <TabsContainer>
+        <div data-testid="card-id" />
             <TabButtons>
                 {Object.keys(routes).map((routeKey) => {
                     const route = `/${routeKey}`;

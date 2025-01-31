@@ -22,6 +22,7 @@ services:
     environment:
       - REACT_APP_NEWS_API_URL=http://localhost:8000/api/news
       - REACT_APP_ARCHIVED_API_URL=http://localhost:8000/api/news/archived
+      - NODE_OPTIONS=--openssl-legacy-provider
     volumes:
       - ./my-news-app-frontend:/app
       - /app/node_modules  # Evita sobrescribir node_modules

@@ -6,7 +6,7 @@ const ArchivedDisplay = () => {
   const { archivedNews } = useNews();
 
   if (!archivedNews || archivedNews.length === 0) {
-    return <Layout><p>No archived news.</p></Layout>
+    return <Layout><p data-testid="archived-news">No archived news.</p></Layout>
   }
     return (
       <Layout>

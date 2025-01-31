@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { useNews } from "../providers/NewsProvider";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
 import { parseDate } from '../utils/date';
 
 const Card = styled.div`
