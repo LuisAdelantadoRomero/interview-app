@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useNews } from "../providers/NewsProvider";
+import { useArchivedNews } from '../providers/ArchivedProvider';
 import { parseDate } from '../utils/date';
 
 const Card = styled.div`
@@ -36,16 +37,17 @@ const Button = styled.button`
 
 const NewsCard = ({ title, image, description, date, archived }) => {
   const { archiveNews, deleteNew, loadingTitle } = useNews();
+  const { newsList } = useArchivedNews();
   const handleArchive = () => archiveNews(title);
   const deleteArchive = () => deleteNew(title);
 
     return (
-        <Card>
+        <Card data-testid={`new-card-${title}`}>
             <Image src={image} alt={title} />
             <h2>{title}</h2>
             <p>{parseDate(date)}</p>
             <p>{description}</p>
-            {!archived ? <Button disabled={loadingTitle === title} onClick={handleArchive}>Archive</Button> : <Button onClick={deleteArchive}>Delete</Button>}
+            {!archived ? <Button data-testid={`new-btn-${title}`} disabled={loadingTitle === title} onClick={handleArchive}>Archive</Button> : <Button data-testid={`remove-btn-${title}`} onClick={deleteArchive}>Delete</Button>}
         </Card>
         
       );

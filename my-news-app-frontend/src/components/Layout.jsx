@@ -49,13 +49,12 @@ function Layout({ children }) {
     return (
         <>
         <TabsContainer>
-        <div data-testid="card-id" />
             <TabButtons>
                 {Object.keys(routes).map((routeKey) => {
                     const route = `/${routeKey}`;
                     const isActive = window.location.pathname === route;
                     return (
-                        <TabButton to={route} className={isActive ? "active" : ""} key={routeKey}>
+                        <TabButton to={route} className={isActive ? "active" : ""} key={routeKey} data-testid={`layout-tabbutton-${routeKey}`}>
                             {routeKey}
                         </TabButton>
                     );

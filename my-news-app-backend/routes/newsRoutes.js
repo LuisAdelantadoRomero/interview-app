@@ -25,7 +25,7 @@ router.get("/archived", async (req, res) => {
 });
 
 // Archive a news item by title
-router.put("/archive/:title", async (req, res) => {
+router.put("/archived/:title", async (req, res) => {
     console.log('Archiving news');
     const title = decodeURIComponent(req.params.title); // Decode the title
     console.log('Title to archive:', title);

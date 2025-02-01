@@ -7,12 +7,11 @@ const NewsDisplay = () => {
 
   const activeNews = newsList.filter(news => !news.archived);
 
-  if (!activeNews.length) return <Layout><p>No news available.</p></Layout>
+  if (!activeNews.length) return <Layout><p data-testid="news-empty">No news available.</p></Layout>
 
   return (
     <Layout>
       {activeNews.map((item, index) => (
-
           <NewsCard
             key={index}
             title={item.title}
