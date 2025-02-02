@@ -74,7 +74,7 @@ This will open a terminal inside the `my_node_app` container.
 
 ---
 
-## Try only the frontend
+## Test only the frontend
 
 - If you want to test just the frontend app without executing all the containers you can do it loadind the dataExample.js in the NewProvider.js file
 
