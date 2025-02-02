@@ -61,11 +61,10 @@ export const NewsProvider = ({ children }) => {
         try {
             setLoadingTitle(title)
             fetch(`${ARCHIVED_NEWS_URL}/${title}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ archived: false })
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
             });
         } catch {
           setError(true);

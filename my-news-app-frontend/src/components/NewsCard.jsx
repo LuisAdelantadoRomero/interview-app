@@ -36,8 +36,8 @@ const Button = styled.button`
 `;
 
 const NewsCard = ({ title, image, description, date, archived }) => {
-  const { archiveNews, deleteNew, loadingTitle } = useNews();
-  const { newsList } = useArchivedNews();
+  const { archiveNews, loadingTitle } = useNews();
+  const { deleteNew } = useArchivedNews();
   const handleArchive = () => archiveNews(title);
   const deleteArchive = () => deleteNew(title);
 

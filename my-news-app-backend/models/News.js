@@ -6,7 +6,7 @@ const newsSchema = new mongoose.Schema({
     content: { type: String },
     date: { type: Date, default: Date.now },
     archived: { type: Boolean, default: false },
-    archivedDate: { type: Date },
+    archiveDate: { type: Date },
     image: { type: String, required: true }
 });
 

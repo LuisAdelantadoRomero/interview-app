@@ -34,7 +34,10 @@ router.put("/archived/:title", async (req, res) => {
         // Use Mongoose's findOneAndUpdate to find the news by title and update the 'archived' field
         const updatedNews = await News.findOneAndUpdate(
             { title: title },   // Search for the news item by title
-            { archived: true },  // Set the 'archived' field to true
+            { 
+                archived: true, // Set the 'archived' field to true
+                archiveDate: Date.now()  // Set the 'archivedDate' field to the current date
+            },  
             { new: true }        // Return the updated document
         );
 
