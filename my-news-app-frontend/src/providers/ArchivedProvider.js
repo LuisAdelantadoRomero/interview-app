@@ -18,10 +18,10 @@ export const ArchivedProvider = ({ children }) => {
                 const response = await fetch(ARCHIVED_NEWS_URL);
                 const data = await response.json();
                 const sortedData = data.sort((a, b) => {
-                    const dateA = new Date(a.date); // Convert date to Date object
-                    const dateB = new Date(b.date); // Convert date to Date object
+                    const dateA = new Date(a.date); 
+                    const dateB = new Date(b.date); 
                 
-                    return dateB - dateA; // Sort in descending order
+                    return dateB - dateA; 
                 });
                 setArchivedNews(sortedData);
             } catch {
@@ -45,8 +45,6 @@ export const ArchivedProvider = ({ children }) => {
             throw new Error('Failed to delete the news');
           }
       
-          // After successful deletion, update your state if needed
-          // For example, removing the deleted news from your archivedNews list
           setArchivedNews(prevArchived =>
             prevArchived.filter(news => news.title !== title)
           );

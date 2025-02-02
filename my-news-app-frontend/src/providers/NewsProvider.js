@@ -17,30 +17,29 @@ export const NewsProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
 
-    // Fetch news from the API on mount
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        setError(false); // Reset the error state
-        setLoading(true); // Set loading to true
+        setError(false); 
+        setLoading(true);
         const response = await fetch(NEWS_URL);
         const data = await response.json();
         const sortedData = data.sort((a, b) => {
-          const dateA = new Date(a.date); // Convert date to Date object
-          const dateB = new Date(b.date); // Convert date to Date object
+          const dateA = new Date(a.date); 
+          const dateB = new Date(b.date); 
         
-          return dateB - dateA; // Sort in descending order
+          return dateB - dateA; 
         });
         
-        setNewsList(sortedData); // Update newsList state with fetched data
+        setNewsList(sortedData); 
       } catch {
-        setError(true); // Set error to true if an error occurs
+        setError(true); 
       } finally {
-        setLoading(false); // Set loading to false regardless of the outcome
+        setLoading(false); 
       }
     };
 
-    fetchNews(); // Call the fetch function
+    fetchNews(); 
   }, []);
 
   const archiveNews = (title) => {
@@ -52,7 +51,7 @@ export const NewsProvider = ({ children }) => {
             )
           );
 
-          // Add the archived news to the archivedNews list
+         
         setArchivedNews(prevArchived => [
           ...prevArchived,
           { ...newsToArchive, archived: true }

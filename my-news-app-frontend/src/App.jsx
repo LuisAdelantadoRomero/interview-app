@@ -8,6 +8,7 @@ function App() {
   return (
     <ArchivedProvider>
         <NewsProvider>
+          {/* Added to avoid some warning related to future changes in the router library */}
           <Router future={{
                 v7_startTransition: true,
                 v7_relativeSplatPath: true,

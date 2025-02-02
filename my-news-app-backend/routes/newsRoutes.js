@@ -3,7 +3,6 @@ const News = require("../models/News");
 
 const router = express.Router();
 
-// Get all news (filtering out archived by default)
 router.get("/", async (req, res) => {
     console.log('get all news');
     try {
@@ -14,7 +13,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Get archived news
 router.get("/archived", async (req, res) => {
     try {
         const archivedNews = await News.find({ archived: true });
@@ -24,28 +22,25 @@ router.get("/archived", async (req, res) => {
     }
 });
 
-// Archive a news item by title
 router.put("/archived/:title", async (req, res) => {
     console.log('Archiving news');
-    const title = decodeURIComponent(req.params.title); // Decode the title
+    const title = decodeURIComponent(req.params.title); 
     console.log('Title to archive:', title);
     
     try {
-        // Use Mongoose's findOneAndUpdate to find the news by title and update the 'archived' field
         const updatedNews = await News.findOneAndUpdate(
-            { title: title },   // Search for the news item by title
+            { title: title },  
             { 
-                archived: true, // Set the 'archived' field to true
-                archiveDate: Date.now()  // Set the 'archivedDate' field to the current date
+                archived: true, 
+                archiveDate: Date.now() 
             },  
-            { new: true }        // Return the updated document
+            { new: true }      
         );
 
         if (!updatedNews) {
             return res.status(404).json({ message: "News item not found" });
         }
 
-        // Send back the updated news item
         res.json(updatedNews);
     } catch (error) {
         console.error('Error archiving news:', error);

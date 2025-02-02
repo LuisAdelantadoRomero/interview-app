@@ -40,21 +40,7 @@ const server = (newsResponse = [], archiveResponse = []) => setupServer(
 );
 
 describe('Tests', () => {
-
-// Enable request interception.
-// beforeAll(() => server.listen())
-
-// Reset handlers so that each test could alter them
-// without affecting other, unrelated tests.
-// afterEach(() => server().resetHandlers())
-
-// Don't forget to clean up afterwards.
 afterAll(() => server().close())
-
-// Ok, so here's what your tests might look like
-
-// this is a handy function that I would utilize for any component
-// that relies on the router being in context
   const render = (ui, {route = '/news'} = {}) => {
     return {
       user: userEvent.setup(),

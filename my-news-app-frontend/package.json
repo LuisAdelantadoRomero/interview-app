@@ -1,7 +1,6 @@
 {
-  "name": "react-testing-library-examples",
+  "name": "news-app-frontend",
   "version": "1.0.0",
-  "description": "A repo full of examples of how to use react-testing-library and test your react components",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
