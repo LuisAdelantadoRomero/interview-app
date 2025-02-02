@@ -78,8 +78,7 @@ This will open a terminal inside the `my_node_app` container.
 
 - If you want to test just the frontend app without executing all the containers you can do it loadind the dataExample.js in the NewProvider.js file
 
-  ```
-
+```sh
 import exampleNews from '../data/dataExample';
 
 import { useArchivedNews } from "../providers/ArchivedProvider";
@@ -90,7 +89,6 @@ const ARCHIVED_NEWS_URL = process.env.REACT_APP_ARCHIVED_API_URL;
 
 export const NewsProvider = ({ children }) => {
   const { setArchivedNews } = useArchivedNews();
-  const [newsList, setNewsList] = useState(exampleNews); //here instead of anempty array we use the exampleNews
-
-  ```
+  const [newsList, setNewsList] = useState(exampleNews); //here instead of an empty array we use the exampleNews
+```
 
