@@ -18,14 +18,14 @@ services:
   frontend:
     build: ./my-news-app-frontend
     ports:
-      - "5500:3000"  # Ajustado para React/Vite
+      - "5500:3000"  
     environment:
       - REACT_APP_NEWS_API_URL=http://localhost:8000/api/news
       - REACT_APP_ARCHIVED_API_URL=http://localhost:8000/api/news/archived
       - NODE_OPTIONS=--openssl-legacy-provider
     volumes:
       - ./my-news-app-frontend:/app
-      - /app/node_modules  # Evita sobrescribir node_modules
+      - /app/node_modules  
     stdin_open: true
     tty: true
     networks:
@@ -37,7 +37,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db  # Corregido aquí
+      - mongodb_data:/data/db  
       - ./data/initdb.js:/docker-entrypoint-initdb.d/initdb.js
     networks:
       - my_network
@@ -46,5 +46,5 @@ networks:
   my_network:
 
 volumes:
-  mongodb_data:  # Corregido aquí también
+  mongodb_data:  
     driver: local
